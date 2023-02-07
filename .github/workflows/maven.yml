@@ -24,6 +24,9 @@ jobs:
           name: Package
           path: staging
           
+      - name: download artifact
+        run: gh run download -n Package
+        
       - name: Check out code
         uses: actions/checkout@v2    
         
