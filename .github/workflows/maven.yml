@@ -48,6 +48,8 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           dockerfile: DockerFile
+          context: DockerFile
+          file: DockerFile
           push: true
           tags: latest
           labels: 1.0
