@@ -17,9 +17,30 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - run: mvn install -DskipTests
-      - run: mkdir staging && cp target/*.jar staging
+      - run: mkdir staging && cp target/*.jar staging && cd staging
+  
       - uses: actions/upload-artifact@v3
         with:
           name: Package
           path: staging
+          
+      - name: Check out code
+        uses: actions/checkout@v2    
+        
+      - name: Build image
+        run: docker build --build-arg JAR_FILE=./app.jar -t khawla8/myapp .
 
+
+      - name: Log in to registry
+        # This is where you will update the personal access token to GITHUB_TOKEN
+        run: echo "${{ secrets.GHCR_PASSWORD }}" | docker login ghcr.io -u khawlapeaqock/springboot-app $ --password-stdin
+
+      - name: Push image
+        run: |
+          IMAGE_ID=ghcr.io/khawlapeaqock/springboot-app/spring-github   
+          VERSION=1.0
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag spring-app-git $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
+    
