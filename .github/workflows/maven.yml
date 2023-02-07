@@ -44,8 +44,8 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: latest
+          labels: 1.0
           
       #- uses: actions/checkout@v2    
       #- name: Build the hello-docker Docker image
