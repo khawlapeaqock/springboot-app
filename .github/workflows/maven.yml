@@ -17,7 +17,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - run: mvn install -DskipTests
-      - run: mkdir staging && cp target/*.jar staging 
+     # - run: mkdir staging && cp target/*.jar staging 
   
       #- uses: actions/upload-artifact@v3
        # with:
