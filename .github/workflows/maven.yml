@@ -16,7 +16,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - run: mvn install -DskipTests
+      - run: |
+             mvn install -DskipTests
              ls target
      # - run: |
       #    mkdir staging && cp target/*.jar staging 
