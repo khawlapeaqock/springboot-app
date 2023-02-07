@@ -16,23 +16,26 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - run: mvn install -DskipTests
       - run: |
-             mvn install -DskipTests
-             ls target
-     # - run: |
-      #    mkdir staging && cp target/*.jar staging 
-       #   ls staging
+          mkdir staging && cp target/*.jar staging 
+          ls staging
             
-      #- uses: actions/upload-artifact@v3
-       # with:
-        #  name: Package
-         # path: staging
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Package
+          path: staging
           
  #     - name: download artifact
   #      run: download -n Package
   
- 
-       
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: khawlapeaqock
+          password: ${{ secrets.GHCR_PASSWORD }}
+
       
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
