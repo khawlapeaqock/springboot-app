@@ -17,7 +17,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - run: mvn install -DskipTests
-      - run: mkdir staging && cp target/*.jar staging && cd staging
+      - run: mkdir staging && cp target/*.jar staging 
   
       - uses: actions/upload-artifact@v3
         with:
@@ -28,8 +28,7 @@ jobs:
         uses: actions/checkout@v2    
         
       - name: Build image
-        run: docker build --build-arg JAR_FILE=./app.jar -t khawla8/myapp .
-
+        run: docker build -t khawla8/myapp .
 
       - name: Log in to registry
         # This is where you will update the personal access token to GITHUB_TOKEN
