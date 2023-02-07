@@ -17,9 +17,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - run: mvn install -DskipTests
-      - run: |
-          mkdir staging && cp target/*.jar staging 
-          ls staging
+     # - run: |
+      #    mkdir staging && cp target/*.jar staging 
+       #   ls staging
             
       #- uses: actions/upload-artifact@v3
        # with:
@@ -37,12 +37,7 @@ jobs:
           registry: ghcr.io
           username: khawlapeaqock
           password: ${{ secrets.GHCR_PASSWORD }}
-          
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-        with:
-          images: khawla8/spring-git
+
           
       - name: Checkout
         uses: actions/checkout@v2    
