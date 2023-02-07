@@ -29,19 +29,40 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2    
         
-      - name: Build image
-        run: docker build -t khawla8/myapp DockerFile.txt
-
-      - name: Log in to registry
-        # This is where you will update the personal access token to GITHUB_TOKEN
-        run: echo "${{ secrets.GHCR_PASSWORD }}" | docker login ghcr.io -u khawlapeaqock/springboot-app $ --password-stdin
-
-      - name: Push image
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: khawlapeaqock
+          password: ${{ secrets.GHCR_PASSWORD }}
+      - name: Build the hello-docker Docker image
         run: |
-          IMAGE_ID=ghcr.io/khawlapeaqock/springboot-app/spring-github   
-          VERSION=1.0
-          echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
-          docker tag spring-app-git $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+         docker build . --tag ghcr.io/spring-app/git:latest
+         docker push ghcr.io/spring-app/git:latest
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+     # - name: Log in to registry
+        # This is where you will update the personal access token to GITHUB_TOKEN
+     #   run: echo "${{ secrets.GHCR_PASSWORD }}" | docker login ghcr.io -u khawlapeaqock/springboot-app $ --password-stdin
+        
+      #- name: Build image
+      #  registry: docker.io
+       # run: docker build -t khawla8/myapp .
+        
+      #- name: Push image
+       # run: |
+        #  IMAGE_ID=ghcr.io/khawlapeaqock/springboot-app/spring-github   
+         # VERSION=1.0
+          #echo IMAGE_ID=$IMAGE_ID
+          #echo VERSION=$VERSION
+          #docker tag spring-app-git $IMAGE_ID:$VERSION
+          #docker push $IMAGE_ID:$VERSION
     
