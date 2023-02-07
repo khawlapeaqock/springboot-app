@@ -19,13 +19,13 @@ jobs:
       - run: mvn install -DskipTests
       - run: mkdir staging && cp target/*.jar staging 
   
-      - uses: actions/upload-artifact@v3
-        with:
-          name: Package
-          path: staging
+      #- uses: actions/upload-artifact@v3
+       # with:
+        #  name: Package
+         # path: staging
           
-      - name: download artifact
-        run: download -n Package
+ #     - name: download artifact
+  #      run: download -n Package
         
       - name: Check out code
         uses: actions/checkout@v2    
